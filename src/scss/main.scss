@@ -1,0 +1,109 @@
+$main-color: #0088cc;
+
+@mixin animated($duraction) {
+  -webkit-transition: $duraction;
+     -moz-transition: $duraction;
+      -ms-transition: $duraction;
+          transition: $duraction;
+}
+
+@mixin transform($string) {
+	-webkit-transform: $string;
+	-moz-transform: $string;
+	-ms-transform: $string;
+	-o-transform: $string;
+	transform: $string;
+}
+
+
+*{
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body{
+	margin:0;
+	padding:0;
+	font-family: arial;
+	overflow: hidden;
+	user-select: none;
+}
+
+h1{
+	font-size: 16px;
+	text-align: center;
+	margin: 10px 0;
+	color: $main-color;
+	text-transform: uppercase;
+}
+
+.app{
+	height: 100vh;
+	&-area{
+		position: absolute;
+		top:0;
+		left:0;
+		height: 100%;
+		overflow: auto;
+		width: calc(100% - 200px);
+	}
+	&-panel{
+		position: absolute;
+		top:0;
+		right:0;
+		overflow: auto;
+		width: 200px;
+		height: 100%;
+		border-left: 3px solid $main-color;
+		&-elem{
+			padding: 15px 10px 15px 60px;
+			position: relative;
+			cursor: pointer;
+			&:after{
+				content: '';
+				display: block;
+				position: absolute;
+				width: 40px;
+				height: 40px;
+				top: 50%;
+				left: 10px;
+				margin-top: -20px;
+				border-radius: 50%;
+				background-color: #fff;
+				@include animated(0.3s);
+				background-position: center;
+				background-size: 25px 25px;
+				background-repeat: no-repeat;
+				box-shadow: 0 0 0 2px $main-color;
+			}
+			&__node{
+				&:after{
+					background-image: url(../images/avatar.svg);
+				}
+			}
+			&:hover{
+				&:after{
+					@include transform(scale(0.9));
+					box-shadow: 0 0 0 4px $main-color;
+				}
+			}
+			&__draggable{
+				position: absolute;
+				@include transform(translate(-50%, -50%));
+				padding: 0;
+				font-size: 0;
+				width: 40px;
+				height: 40px;
+				&:after{
+					left:0;
+				}
+				&.remove{
+					@include animated(0.4s);
+					@include transform(translate(-50%, -50%) scale(3));
+					opacity: 0;
+					visibility: hidden;
+				}
+			}
+		}
+	}
+}
