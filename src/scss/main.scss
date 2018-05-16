@@ -46,6 +46,16 @@ h1{
 		height: 100%;
 		overflow: auto;
 		width: calc(100% - 200px);
+		z-index: 3;
+		&-section{
+			margin: 2px;
+			background-color: $main-color;
+			height: 100px;
+			&__fake{
+				background-color: transparent;
+				box-shadow: inset 0 0 0 4px $main-color;
+			}
+		}
 	}
 	&-panel{
 		position: absolute;
@@ -55,9 +65,11 @@ h1{
 		width: 200px;
 		height: 100%;
 		border-left: 3px solid $main-color;
+		z-index: 1;
 		&-elem{
 			padding: 15px 10px 15px 60px;
 			position: relative;
+			z-index: 2;
 			cursor: pointer;
 			&:after{
 				content: '';
